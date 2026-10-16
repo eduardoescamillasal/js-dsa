@@ -25,4 +25,26 @@ class LinkedList {
     this.length++;
     return this;
   }
+
+  pop() {
+    if (!this.head) {
+      return undefined;
+    }
+
+    let prev = this.head;
+    let temp = this.head;
+
+    while (temp.next) {
+      prev = temp;
+      temp = temp.next;
+    }
+    this.tail = prev;
+    this.tail.next = null;
+    this.length--;
+    if (this.length === 0) {
+      this.head = null;
+      this.tail = null;
+    }
+    return temp;
+  }
 }
