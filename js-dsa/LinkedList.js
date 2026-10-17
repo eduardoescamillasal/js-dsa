@@ -1,11 +1,11 @@
-class Node {
+export class Node {
   constructor(value) {
     this.value = value;
     this.next = null;
   }
 }
 
-class LinkedList {
+export class LinkedList {
   constructor(value) {
     const newNode = new Node(value);
     this.head = newNode;
@@ -108,5 +108,34 @@ class LinkedList {
     this.length++;
     return true;
   }
+
+  remove(index) {
+    if (index === 0) return this.shift();
+    if (index === this.length - 1) return this.pop();
+    if (index < 0 || index >= this.length) return undefined;
+
+    const before = this.get(index - 1);
+    const temp = before.next;
+
+    before.next = temp.next;
+    temp.next = null;
+    this.length--;
+
+    return temp;
+  }
+
+  reverse() {
+    let temp = this.head;
+    this.head = this.tail;
+    this.tail = temp;
+
+    let prev = null;
+    let next = temp.next;
+    for (let i = 0; i < this.length; i++) {
+      next = temp.next;
+      temp.next = prev;
+      prev = temp;
+      temp = next;
+    }
+  }
 }
- 
