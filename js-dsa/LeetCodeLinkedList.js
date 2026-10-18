@@ -38,4 +38,48 @@ export class LeetCodeLinkedList extends LinkedList {
     }
     return slow;
   }
+
+  removeDuplicatesSlow() {
+    let current = this.head;
+    while (current) {
+      let runner = current;
+      while (runner.next) {
+        if ((runner.next.value = current.value)) {
+          runner.next = runner.next.next;
+          this.length--;
+        } else {
+          runner = runner.next;
+        }
+      }
+      current = current.next;
+    }
+    return this;
+  }
+
+  removeDuplicatesFast() {
+    const values = new Set();
+    let previous = null;
+    let current = this.head;
+    while (current !== null) {
+      if (values.has(current.value)) {
+        previous.next = current.next;
+        this.length -= 1;
+      } else {
+        values.add(current.value);
+        previous = current;
+      }
+      current = current.next;
+    }
+  }
+
+  binaryToDecimal() {
+    let num = 0;
+    let temp = this.head;
+    while (!temp) {
+      num = 2 * num + temp.value;
+      temp = temp.next;
+    }
+
+    return num;
+  }
 }
