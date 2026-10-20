@@ -44,3 +44,17 @@ export function reverseString(str) {
 
   return res;
 }
+
+export function isBalancedParenthesis(parenthesis) {
+  const stack = new ArrayStack();
+  for (const c of parenthesis) {
+    if (c === "(") {
+      stack.push(c);
+    } else if (c === ")") {
+      if (stack.isEmpty() || stack.pop() !== "(") {
+        return false;
+      }
+    }
+  }
+  return stack.isEmpty();
+}
